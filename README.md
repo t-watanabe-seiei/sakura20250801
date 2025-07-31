@@ -26,6 +26,22 @@
    composer install
    npm install && npm run dev
    ```
+
+1.1 .env ファイルのReName
+   ```bash
+    mv .env.example .env
+   ```
+1.2 APP_KEY の更新
+   ```bash
+    php artisan key:generate
+   ```
+
+
+2.0 データベース
+   ```bash
+   touch database/database.sqlite
+   ```
+
 2. データベースを初期化
    ```bash
    php artisan migrate
@@ -34,7 +50,19 @@
    ```bash
    php artisan serve
    ```
-4. ブラウザで `http://localhost:8000` にアクセス
+
+## .envのMIX_ASSET_URLについて
+CSSやJSのパスは、.envのMIX_ASSET_URLでベースURLを指定できます。
+例：
+```
+MIX_ASSET_URL="/"
+```
+Bladeテンプレートでは
+```blade
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
+<script src="{{ mix('js/app.js') }}" defer></script>
+```
+で自動的にMIX_ASSET_URLが反映されます。
 
 ## テスト実行方法
 ```bash
