@@ -29,7 +29,7 @@
                 @endif
             </p>
         </div>
-        <a href="/" class="next-btn">つぎのもんだいへ</a>
+        <a href="{{ config('app.mix_url') }}" class="next-btn">つぎのもんだいへ</a>
         <a href="history" class="history-btn">これまでのれきしを見る</a>
     </div>
 </body>
