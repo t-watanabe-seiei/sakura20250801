@@ -39,7 +39,7 @@
                 @endforeach
             </tbody>
         </table>
-        <a href="/" class="next-btn">もんだいに戻る</a>
+        <a href="{{ config('app.mix_url') }}" class="next-btn">もんだいに戻る</a>
     </div>
 </body>
 </html>
