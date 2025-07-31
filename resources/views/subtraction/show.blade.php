@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>減法問題 - 小学1年生用</title>
+    <title>ひきざん - 小学１年生用</title>
 <!-- Styles -->
 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 <!-- Scripts -->
@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>減法問題にチャレンジ！</h1>
+        <h1>ひきざんにチャレンジ！</h1>
         <form method="POST" action="answer">
             @csrf
             <div class="problem">
@@ -39,7 +39,7 @@
                     @endforeach
                 </div>
             </div>
-            <button type="submit">こたえを送信</button>
+            <button type="submit">こたえをおくる</button>
         </form>
     </div>
 </body>
