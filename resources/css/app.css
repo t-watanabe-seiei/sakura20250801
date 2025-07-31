@@ -1,11 +1,119 @@
+/* かわいい選択ボタンデザイン */
+.choice-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.choice-btn {
+    font-size: 1.7rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 24px;
+    margin: 12px;
+    padding: 20px 40px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+    outline: none;
+    position: relative;
+    letter-spacing: 0.1em;
+}
+.choice-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.color-0 { background: #ffb6c1; color: #fff; }
+.color-1 { background: #ffd700; color: #fff; }
+.color-2 { background: #90ee90; color: #fff; }
+.color-3 { background: #87cefa; color: #fff; }
+.choice-btn::after {
+    content: "★";
+    position: absolute;
+    right: 18px;
+    top: 12px;
+    font-size: 1.2rem;
+    opacity: 0.3;
+}
 @import 'tailwindcss';
+body {
+    background: #f7faff;
+    font-family: 'Rounded Mplus 1c', 'Noto Sans JP', Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+.container {
+    max-width: 480px;
+    margin: 40px auto;
+    background: #fffbe7;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    padding: 32px 24px;
+    text-align: center;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+h1 {
+    color: #ff9800;
+    font-size: 2rem;
+    margin-bottom: 24px;
+    font-weight: bold;
+}
+
+.problem {
+    font-size: 2rem;
+    margin-bottom: 24px;
+}
+
+input[type="number"] {
+    font-size: 1.5rem;
+    width: 80px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid #ff9800;
+    text-align: center;
+}
+
+button, .next-btn, .history-btn {
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 1.2rem;
+    margin: 16px 8px 0 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+}
+button:hover, .next-btn:hover, .history-btn:hover {
+    background: #ffb74d;
+}
+
+.result {
+    font-size: 1.3rem;
+    margin-bottom: 24px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 24px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+th {
+    background: #ffe0b2;
+    color: #ff9800;
+    font-weight: bold;
+}
+tr:last-child td {
+    border-bottom: none;
 }
