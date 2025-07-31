@@ -25,12 +25,14 @@
                         $choices = [];
                         $answer = $problem->answer;
                         $choices[] = $answer;
-                        while(count($choices) < 4) {
-                            $rand = rand(0, $problem->minuend);
+                        $min = max(0, $answer - 3);
+                        $max = min($problem->minuend, $answer + 3);
+                        while(count($choices) < 6) {
+                            $rand = rand($min, $max);
                             if(!in_array($rand, $choices)) $choices[] = $rand;
                         }
                         shuffle($choices);
-                        $colors = ['#ffb6c1', '#ffd700', '#90ee90', '#87cefa'];
+                        $colors = ['#ffb6c1', '#ffd700', '#90ee90', '#87cefa', '#ffa07a', '#dda0dd'];
                     @endphp
                     @foreach($choices as $i => $choice)
                         <button type="submit" name="answer" value="{{ $choice }}" class="choice-btn color-{{ $i }}">
@@ -39,7 +41,6 @@
                     @endforeach
                 </div>
             </div>
-            <button type="submit">こたえをおくる</button>
         </form>
     </div>
 </body>
