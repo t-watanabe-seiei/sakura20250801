@@ -25,18 +25,26 @@
                         $choices = [];
                         $answer = $problem->answer;
                         $choices[] = $answer;
-                        // 10～18の範囲で他の選択肢を生成
-                        $pool = range(2, 18);
-                        if(($key = array_search($answer, $pool)) !== false) {
-                            unset($pool[$key]);
+                        
+                        // 正解の前後の数字を選択肢にする（負の数を避ける）
+                        // 正解の±1, ±2, ±3から選択
+                        $offsets = [-3, -2, -1, 1, 2, 3];
+                        foreach($offsets as $offset) {
+                            $candidate = $answer + $offset;
+                            // 0以上18以下の範囲で追加
+                            if ($candidate >= 0 && $candidate <= 18 && !in_array($candidate, $choices)) {
+                                $choices[] = $candidate;
+                            }
                         }
-                        $pool = array_values($pool);
-                        while(count($choices) < 6 && count($pool) > 0) {
-                            $randKey = array_rand($pool);
-                            $choices[] = $pool[$randKey];
-                            unset($pool[$randKey]);
-                            $pool = array_values($pool);
+                        
+                        // 足りない場合は範囲内から追加
+                        while(count($choices) < 6) {
+                            $candidate = rand(max(0, $answer - 5), min(18, $answer + 5));
+                            if (!in_array($candidate, $choices)) {
+                                $choices[] = $candidate;
+                            }
                         }
+                        
                         shuffle($choices);
                         $colors = ['#ffb6c1', '#ffd700', '#90ee90', '#87cefa', '#ffa07a', '#dda0dd'];
                     @endphp
@@ -50,5 +58,22 @@
         </form>
         <a href="{{ config('app.mix_url') }}" class="back-btn">かんたんなレベルにもどる</a>
     </div>
+    
+    <!-- キーボード入力オプション -->
+    <script>
+        // 数字キーでの回答を可能にする
+        document.addEventListener('keydown', function(e) {
+            const key = e.key;
+            // 0-9のキーまたはテンキー
+            if (key >= '0' && key <= '9') {
+                const buttons = document.querySelectorAll('.choice-btn');
+                buttons.forEach(button => {
+                    if (button.value === key) {
+                        button.click();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

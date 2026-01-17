@@ -49,5 +49,22 @@
             </div>
         </form>
     </div>
+    
+    <!-- キーボード入力オプション -->
+    <script>
+        // 数字キーでの回答を可能にする
+        document.addEventListener('keydown', function(e) {
+            const key = e.key;
+            // 0-9のキーまたはテンキー
+            if (key >= '0' && key <= '9') {
+                const buttons = document.querySelectorAll('.choice-btn');
+                buttons.forEach(button => {
+                    if (button.value === key) {
+                        button.click();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

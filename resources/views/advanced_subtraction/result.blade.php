@@ -241,28 +241,35 @@
 
         // 効果音（オプション：ブラウザがサポートしている場合）
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        function playSound(frequency, duration) {
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            oscillator.frequency.value = frequency;
-            oscillator.type = 'sine';
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + duration);
+        
+        // 複数の音を同時に鳴らす関数（和音）
+        function playChord(frequencies, duration, volume = 0.5) {
+            frequencies.forEach((freq, index) => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.frequency.value = freq;
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(volume / frequencies.length, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration);
+            });
         }
         
         @if($correctStreak >= 5)
-            // 豪華な音
-            playSound(523.25, 0.2); // C
-            setTimeout(() => playSound(659.25, 0.2), 100); // E
-            setTimeout(() => playSound(783.99, 0.3), 200); // G
+            // 豪華な音（5問連続）
+            playChord([523.25, 659.25], 0.25, 0.6); // C + E
+            setTimeout(() => playChord([659.25, 783.99], 0.25, 0.6), 150); // E + G
+            setTimeout(() => playChord([783.99, 1046.50], 0.4, 0.7), 300); // G + C(高)
+            setTimeout(() => playChord([523.25, 659.25, 783.99], 0.5, 0.8), 500); // C + E + G
         @else
-            // 通常の正解音
-            playSound(523.25, 0.15);
-            setTimeout(() => playSound(659.25, 0.15), 100);
+            // 通常の正解音（強化版）
+            playChord([523.25, 659.25], 0.2, 0.5); // C + E
+            setTimeout(() => playChord([659.25, 783.99], 0.25, 0.55), 120); // E + G
+            setTimeout(() => playChord([783.99], 0.2, 0.5), 250); // G
+        @endif
         @endif
     </script>
     @endif
