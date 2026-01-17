@@ -26,20 +26,20 @@
                         $answer = $problem->answer;
                         $choices[] = $answer;
                         
-                        // 正解の前後の数字を選択肢にする（負の数を避ける）
+                        // 正解の前後の数字を選択肢にする（1桁の範囲：0-9）
                         // 正解の±1, ±2, ±3から選択
                         $offsets = [-3, -2, -1, 1, 2, 3];
                         foreach($offsets as $offset) {
                             $candidate = $answer + $offset;
-                            // 0以上18以下の範囲で追加
-                            if ($candidate >= 0 && $candidate <= 18 && !in_array($candidate, $choices)) {
+                            // 0以上9以下の範囲で追加（1桁に制限）
+                            if ($candidate >= 0 && $candidate <= 9 && !in_array($candidate, $choices)) {
                                 $choices[] = $candidate;
                             }
                         }
                         
                         // 足りない場合は範囲内から追加
                         while(count($choices) < 6) {
-                            $candidate = rand(max(0, $answer - 5), min(18, $answer + 5));
+                            $candidate = rand(0, 9);
                             if (!in_array($candidate, $choices)) {
                                 $choices[] = $candidate;
                             }
