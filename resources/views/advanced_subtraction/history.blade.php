@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>解答履歴 - 減法問題</title>
+    <title>解答履歴 - 減法問題（むずかしいレベル）</title>
 <!-- Styles -->
 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 <!-- Scripts -->
@@ -78,7 +78,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>これまでの解答履歴</h1>
+        <h1>これまでの解答履歴（むずかしいレベル）</h1>
         
         @if(session('message'))
             <div class="message">{{ session('message') }}</div>
@@ -150,9 +150,10 @@
             {{ $histories->links() }}
         </div>
         
-        <a href="{{ config('app.mix_url') }}" class="next-btn">もんだいにもどる</a>
+        <a href="/advanced" class="next-btn">もんだいにもどる</a>
+        <a href="{{ config('app.mix_url') }}" class="back-btn">かんたんなレベルにもどる</a>
         
-        <form method="POST" action="{{ route('subtraction.reset') }}" style="display:inline;" onsubmit="return confirm('本当に履歴を削除しますか？');">
+        <form method="POST" action="{{ route('advanced.reset') }}" style="display:inline;" onsubmit="return confirm('本当に履歴を削除しますか？');">
             @csrf
             <button type="submit" class="reset-btn">履歴をリセット</button>
         </form>

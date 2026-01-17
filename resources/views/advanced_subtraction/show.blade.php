@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ひきざん - 小学１年生用</title>
+    <title>ひきざん（むずかしいレベル） - 小学１年生用</title>
 <!-- Styles -->
 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 <!-- Scripts -->
@@ -10,9 +10,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>ひきざんにチャレンジ！</h1>
-        <p><a href="/advanced" style="color: #007bff;">むずかしいレベルにチャレンジ</a></p>
-        <form method="POST" action="answer">
+        <h1>ひきざんにチャレンジ！（むずかしいレベル）</h1>
+        <form method="POST" action="/advanced/answer">
             @csrf
             <div class="problem">
                 <span class="minuend">{{ $problem->minuend }}</span>
@@ -26,7 +25,8 @@
                         $choices = [];
                         $answer = $problem->answer;
                         $choices[] = $answer;
-                        $pool = range(1, 9);
+                        // 10～18の範囲で他の選択肢を生成
+                        $pool = range(2, 18);
                         if(($key = array_search($answer, $pool)) !== false) {
                             unset($pool[$key]);
                         }
@@ -48,6 +48,7 @@
                 </div>
             </div>
         </form>
+        <a href="{{ config('app.mix_url') }}" class="back-btn">かんたんなレベルにもどる</a>
     </div>
 </body>
 </html>

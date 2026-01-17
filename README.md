@@ -3,22 +3,41 @@
 ## アプリ概要
 このWebアプリは、小学1年生が「10以下の数から1位数をひく減法」を楽しく練習できる学習ツールです。問題はランダムに出題され、解答結果はすぐにフィードバックされます。履歴も自動で保存され、保護者や先生が学習状況を確認できます。
 
+**【新機能】** むずかしいレベル（11～19から1～9を引く減法）も練習できるようになりました！
+
 ## 使い方
 1. アプリにアクセスすると、減法問題が表示されます。
 2. 答えを入力して「こたえを送信」ボタンを押します。
 3. 正誤判定が表示され、次の問題に進めます。
 4. 「これまでのれきしを見る」ボタンで過去の解答履歴を確認できます。
+5. 「むずかしいレベルにチャレンジ」リンクから難易度の高い問題に挑戦できます。
+
+## レベル選択
+### 通常レベル（`/`）
+- 10以下の数から1位数をひく減法
+- 例：5 - 3、10 - 7 など
+
+### むずかしいレベル（`/advanced`）
+- 11～19の数から1～9をひく減法
+- 例：15 - 7、18 - 9 など
 
 ## 特徴
 - ログイン不要、個人情報不要で安心
 - 小学校1年生でも直感的に使えるシンプルなデザイン
 - 履歴は匿名（セッションID）で保存
 - 端末・ブラウザ問わず利用可能
+- 2つの難易度レベルで段階的に学習
 
 ## 画面構成
-- トップページ：減法問題の出題・解答フォーム
-- 結果表示ページ：正誤判定と次の問題への誘導
-- 履歴ページ：過去の解答履歴一覧
+### 通常レベル
+- トップページ（`/`）：減法問題の出題・解答フォーム
+- 結果表示ページ（`/answer`）：正誤判定と次の問題への誘導
+- 履歴ページ（`/history`）：過去の解答履歴一覧
+
+### むずかしいレベル
+- 問題ページ（`/advanced`）：減法問題の出題・解答フォーム
+- 結果表示ページ（`/advanced/answer`）：正誤判定と次の問題への誘導
+- 履歴ページ（`/advanced/history`）：過去の解答履歴一覧
 
 ## インストール・起動方法
 1. 必要なパッケージをインストール
@@ -70,70 +89,50 @@ php artisan test
 ```
 
 ## 注意事項
-- 問題は「10以下の数から1位数をひく減法」のみ出題されます。
+- 通常レベルでは「10以下の数から1位数をひく減法」が出題されます。
+- むずかしいレベルでは「11～19の数から1～9をひく減法」が出題されます。
 - 履歴はセッション単位で保存されます。
 - 保護者・教師は履歴ページで学習状況を確認できます。
+- 履歴は1ページ20件ずつ表示され、ページネーションで閲覧できます。
+- 日付ごとの正答率が自動で計算されます。
 
----
-ご不明点はREADMEをご参照ください。
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## アニメーション機能
+### 正解時のアニメーション
+- **通常の正解**：星（⭐✨🌟）が画面上を舞うアニメーション
+- **3問連続正解**：連続正解バッジ（⭐）が表示される
+- **5問連続正解**：豪華な演出
+  - カラフルな紙吹雪が降る
+  - 花火エフェクトが3回発生
+  - 特別な連続正解メッセージと記念バッジ（🏆）
+  - 豪華な効果音（3音階）
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### 効果音
+- Web Audio APIを使用した効果音が再生されます
+- 通常正解：2音階の軽快な音
+- 5問連続正解：3音階の豪華な音
 
-## About Laravel
+## 更新履歴
+### 2026-01-16 (3回目の更新)
+- **[機能追加]** 正解時のアニメーション機能を追加
+  - 通常正解：星が舞うアニメーション
+  - 3問連続正解：連続正解バッジ表示
+  - 5問連続正解：紙吹雪と花火の豪華な演出
+- **[機能追加]** 連続正解カウント機能を追加（セッションで管理）
+- **[機能追加]** Web Audio APIによる効果音を追加
+- 通常レベルとむずかしいレベルの両方に対応（連続カウントは別管理）
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 2026-01-16 (2回目の更新)
+- **[機能追加]** 履歴ページにページネーション機能を追加（1ページ20件表示）
+- **[機能追加]** 日付ごとの正答率の表示機能を追加
+- **[機能追加]** 履歴をリセットするボタンを追加（自分のセッションの履歴のみ削除）
+- 通常レベル、むずかしいレベルの両方に対応
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 2026-01-16
+- **[機能追加]** むずかしいレベル（11～19から1～9を引く減法）を追加
+  - 新しいコントローラー：`AdvancedSubtractionProblemController`
+  - 新しいモデル：`AdvancedSubtractionProblem`
+  - 新しいデータベーステーブル：`advanced_subtraction_histories`
+  - 新しいルート：`/advanced`, `/advanced/answer`, `/advanced/history`
+  - 新しいビュー：`resources/views/advanced_subtraction/`配下
+  - 通常レベルとむずかしいレベルは別々のテーブルで管理されます
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

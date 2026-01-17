@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>けっか- ひきざんのもんだい</title>
+    <title>けっか- ひきざんのもんだい（むずかしいレベル）</title>
 <!-- Styles -->
 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 <!-- Scripts -->
@@ -156,8 +156,8 @@
                 @endif
             </p>
         </div>
-        <a href="{{ config('app.mix_url') }}" class="next-btn">つぎのもんだいへ</a>
-        <a href="history" class="history-btn">これまでのけっかをみる</a>
+        <a href="/advanced" class="next-btn">つぎのもんだいへ</a>
+        <a href="/advanced/history" class="history-btn">これまでのけっかをみる</a>
     </div>
 
     @if($isCorrect)
