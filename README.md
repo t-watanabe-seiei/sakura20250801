@@ -76,7 +76,21 @@ CSSやJSのパスは、.envのMIX_ASSET_URLでベースURLを指定できます�
 ```
 MIX_ASSET_URL="/"
 ```
+
+**重要**: すべてのページ遷移はLaravelの`route()`ヘルパーを使用しているため、サブディレクトリに配置する場合でも自動的に正しいパスが生成されます。
+
 Bladeテンプレートでは
+```blade
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
+<script src="{{ mix('js/app.js') }}" defer></script>
+```
+で自動的にMIX_ASSET_URLが反映されます。
+
+ページ遷移には`route()`ヘルパーを使用：
+```blade
+<a href="{{ route('advanced.show') }}">むずかしいレベル</a>
+<a href="{{ route('subtraction.show') }}">通常レベル</a>
+```
 ```blade
 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 <script src="{{ mix('js/app.js') }}" defer></script>
@@ -112,6 +126,12 @@ php artisan test
 - 5問連続正解：3音階の豪華な音
 
 ## 更新履歴
+### 2026-01-17
+- **[改善]** すべてのビューファイルでハードコードされたパスを`route()`ヘルパーに変更
+  - サブディレクトリへの配置に対応
+  - より保守性の高いコードに改善
+  - `/advanced`, `/advanced/answer`, `/advanced/history` などをすべて`route()`に統一
+
 ### 2026-01-16 (3回目の更新)
 - **[機能追加]** 正解時のアニメーション機能を追加
   - 通常正解：星が舞うアニメーション

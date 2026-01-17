@@ -150,7 +150,7 @@
             {{ $histories->links() }}
         </div>
         
-        <a href="{{ config('app.mix_url') }}" class="next-btn">もんだいにもどる</a>
+        <a href="{{ route('subtraction.show') }}" class="next-btn">もんだいにもどる</a>
         
         <form method="POST" action="{{ route('subtraction.reset') }}" style="display:inline;" onsubmit="return confirm('本当に履歴を削除しますか？');">
             @csrf

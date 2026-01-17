@@ -156,8 +156,8 @@
                 @endif
             </p>
         </div>
-        <a href="/advanced" class="next-btn">つぎのもんだいへ</a>
-        <a href="/advanced/history" class="history-btn">これまでのけっかをみる</a>
+        <a href="{{ route('advanced.show') }}" class="next-btn">つぎのもんだいへ</a>
+        <a href="{{ route('advanced.history') }}" class="history-btn">これまでのけっかをみる</a>
     </div>
 
     @if($isCorrect)

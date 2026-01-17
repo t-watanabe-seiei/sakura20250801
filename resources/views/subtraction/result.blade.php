@@ -156,8 +156,8 @@
                 @endif
             </p>
         </div>
-        <a href="{{ config('app.mix_url') }}" class="next-btn">つぎのもんだいへ</a>
-        <a href="history" class="history-btn">これまでのけっかをみる</a>
+        <a href="{{ route('subtraction.show') }}" class="next-btn">つぎのもんだいへ</a>
+        <a href="{{ route('subtraction.history') }}" class="history-btn">これまでのけっかをみる</a>
     </div>
 
     @if($isCorrect)

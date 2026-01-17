@@ -11,8 +11,8 @@
 <body>
     <div class="container">
         <h1>ひきざんにチャレンジ！</h1>
-        <p><a href="/advanced" style="color: #007bff;">むずかしいレベルにチャレンジ</a></p>
-        <form method="POST" action="answer">
+        <p><a href="{{ route('advanced.show') }}" style="color: #007bff;">むずかしいレベルにチャレンジ</a></p>
+        <form method="POST" action="{{ route('subtraction.answer') }}">
             @csrf
             <div class="problem">
                 <span class="minuend">{{ $problem->minuend }}</span>

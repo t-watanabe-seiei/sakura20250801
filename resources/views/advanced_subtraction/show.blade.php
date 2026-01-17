@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <h1>ひきざんにチャレンジ！（むずかしいレベル）</h1>
-        <form method="POST" action="/advanced/answer">
+        <form method="POST" action="{{ route('advanced.answer') }}">
             @csrf
             <div class="problem">
                 <span class="minuend">{{ $problem->minuend }}</span>
