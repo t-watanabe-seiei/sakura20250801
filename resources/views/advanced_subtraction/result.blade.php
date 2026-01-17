@@ -270,7 +270,6 @@
             setTimeout(() => playChord([659.25, 783.99], 0.25, 0.55), 120); // E + G
             setTimeout(() => playChord([783.99], 0.2, 0.5), 250); // G
         @endif
-        @endif
     </script>
     @endif
 </body>
